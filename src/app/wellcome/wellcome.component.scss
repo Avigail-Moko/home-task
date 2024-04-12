@@ -1,0 +1,46 @@
+.example-chip-list {
+  width: 100%;
+}
+.mat-mdc-radio-button ~ .mat-mdc-radio-button {
+  margin-left: 16px;
+}
+.colorPicker {
+  margin: 1% 1%;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
+.matlable {
+  display: block;
+}
+.form-container {
+  margin-left: 40px;
+}
+
+// toolbar:
+.example-spacer {
+  flex: 1 1 auto;
+}
+.wellcome {
+  margin: 40px 30px;
+}
+.footer {
+  background-color: #673ab7;
+}
+.btn {
+  margin: 1.5% 1.5%;
+}
+.card {
+  margin: 5% 10%;
+}
+.paragraphOfDetails {
+  margin-top: 4px;
+}
+.container{
+  color: white;
+  margin-left: 5px;
+}
+.matToolbar{
+  box-shadow: 7px grey ;
+}
