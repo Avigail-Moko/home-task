@@ -20,7 +20,10 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
 import {MatRippleModule} from '@angular/material/core';
-
+import {FormBuilder, Validators} from '@angular/forms';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTableModule} from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 const modules = [
@@ -42,7 +45,10 @@ const modules = [
     MatNativeDateModule,
     MatTooltipModule,
     MatChipsModule,
-    MatRippleModule
+    MatRippleModule,
+    MatSnackBarModule,
+    MatTableModule,
+    MatTabsModule
     
 ]
 
@@ -52,6 +58,8 @@ const modules = [
     CommonModule,
     ...modules
   ],
+  
+  
   exports : modules
 })
 export class MaterialModule { }

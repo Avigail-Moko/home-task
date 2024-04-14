@@ -1,1 +1,30 @@
-<app-wellcome></app-wellcome>
+<mat-toolbar color="primary" style="position: relative" class="matToolbar">
+  
+    <span>AI Car Dealership</span>
+    <span class="example-spacer"></span>
+    <button
+    matTooltip="move to dashboard page"
+      mat-icon-button
+      class="example-icon"
+      aria-label="Example icon-button with menu icon"
+      (click)="createRouter()"
+    >
+      <mat-icon>computer</mat-icon>
+    </button>
+  </mat-toolbar>
+  <router-outlet></router-outlet>
+
+  <app-data-chart></app-data-chart>
+
+  <footer class="pmd-footer bg-dark pmd-footer-dark footer">
+    <div class="container">
+      <mat-icon fontIcon="twitter"></mat-icon>
+      <div class="pmd-site-info text-md-right text-center">
+        © 2024 A
+        <a href="https://www.reflectiz.com/" target="_blank" style="color: white"
+          >Reflectiz</a
+        >
+        Theme
+      </div>
+    </div>
+  </footer>

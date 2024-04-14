@@ -1,5 +1,6 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {
@@ -8,22 +9,32 @@ import {
 } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Observable, map, startWith } from 'rxjs';
+import { LocalStorageService } from '../local-storage.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-wellcome',
   templateUrl: './wellcome.component.html',
   styleUrls: ['./wellcome.component.scss'],
+  providers: [
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: {showError: true},
+    },
+  ],
 })
 export class WellcomeComponent {
   color: string = 'green';
   myForm: FormGroup;
   errorMessage='';
-  
+
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
   hobbyCtrl = new FormControl('');
   filteredHobbies: Observable<string[]>;
-  hobbies: string[] = ['Reading'];
+  hobbies: string[] = [];
   allHobbies: string[] = ['Sport', 'Nature', 'Cooking', 'Music', 'Art'];
 
   @ViewChild('hobbyInput')
@@ -31,7 +42,11 @@ export class WellcomeComponent {
 
   announcer = inject(LiveAnnouncer);
 
-  constructor(private fb:FormBuilder,private formBuild: FormBuilder,) {
+  constructor(private fb:FormBuilder,
+    private formBuild: FormBuilder,
+    private localStorageService: LocalStorageService,
+    private _snackBar: MatSnackBar,
+    private router: Router,) {
     this.filteredHobbies = this.hobbyCtrl.valueChanges.pipe(
       startWith(null),
       map((fruit: string | null) =>
@@ -60,13 +75,15 @@ export class WellcomeComponent {
     BirthDate: ['', Validators.required],
   });
   fifthFormGroup = this.formBuild.group({
-    LocationDetails: ['', Validators.required],
+    Address: ['', Validators.required],
+    City: ['', Validators.required],
+    Country: ['', Validators.required],
   });
   sixthFormGroup = this.formBuild.group({
     Hobbies: ['', Validators.required],
   });
   seventhFormGroup = this.formBuild.group({
-    FavorateColor: ['', Validators.required],
+    FavoriteColor: ['', Validators.required],
   });
   eighthFormGroup = this.formBuild.group({
     AmountOfSeats: ['', Validators.required],
@@ -75,6 +92,7 @@ export class WellcomeComponent {
     MotorType: ['', Validators.required],
   });
 
+  
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
@@ -112,30 +130,60 @@ export class WellcomeComponent {
       hobby.toLowerCase().includes(filterValue)
     );
   }
-  // validation:
-  validationMessages = {
-    name: [
-      { type: 'required', message: 'שם הוא שדה חובה' },
-      { type: 'minlength', message: 'שם צריך להכיל לפחות 2 תווים' }
-    ],
-    email: [
-      { type: 'required', message: 'דוא"ל הוא שדה חובה' },
-      { type: 'email', message: 'כתובת דואר אלקטרוני אינה תקינה' },
-    ],
-    subject:[
-      { type: 'required', message: 'תחום לימוד הוא שדה חובה' }
-    ],
-    seniority:[
-      { type: 'required', message: 'שנות נסיון הוא שדה חובה' }
-    ],
-    password:[
-      { type: 'required', message: 'סיסמא הוא שדה חובה' },
-      { type: 'minlength', message: 'סיסמא צריכה להכיל לפחות 6 תווים' },
-    ]
-  };
+  onColorChange(newColor: string) {
+    this.color = newColor;
+  }
+
+  //reset local storage
+  // ngOnInit(){
+  //   localStorage.clear();
+  // }
   
+  saveUserData() {
+    const newPersonData = {
+      personalDetails: {
+        fullName: this.firstFormGroup.value.FullName,
+        gender: this.secondFormGroup.value.Gender,
+        emailAddress: this.thirdFormGroup.value.EmailAddress,
+        birthDate: this.fourthFormGroup.value.BirthDate,
+        address: this.fifthFormGroup.value.Address,
+        city: this.fifthFormGroup.value.City,
+        country: this.fifthFormGroup.value.Country,
+        hobbies: this.sixthFormGroup.value.Hobbies,
+        favoriteColor: this.color,
+        amountOfSeats: this.eighthFormGroup.value.AmountOfSeats,
+        motorType: this.ninthFormGroup.value.MotorType,
+      }
+    };
+    this.localStorageService.pushItemToMyArray(newPersonData);
+
+   
+    this.clearForm(); 
+  }
   
-  hide = true;
-  
+  clearForm() {
+    // ניקוי כל שדות הטופס לאחר הוספת הנתונים למערך
+    this.firstFormGroup.reset();
+    this.secondFormGroup.reset();
+    this.thirdFormGroup.reset();
+    this.fourthFormGroup.reset();
+    this.fifthFormGroup.reset();
+    this.sixthFormGroup.reset();
+    this.seventhFormGroup.reset();
+    this.eighthFormGroup.reset();
+    this.ninthFormGroup.reset();
  
+}
+
+openSnackBar(message: string) {
+  const snackBarRef = this._snackBar.open(message);
+  setTimeout(() => {
+    snackBarRef.dismiss();
+  }, 7000); 
+}
+
+
+
+
+
 }
