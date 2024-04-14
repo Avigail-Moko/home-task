@@ -2,15 +2,16 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LocalStorageService {
-  
   private myArraySubject = new BehaviorSubject<string[]>([]);
 
-  constructor() {this.loadArrayFromLocalStorage() }
+  constructor() {
+    this.loadArrayFromLocalStorage();
+  }
 
-//Load the array from local storage and update the BehaviorSubject
+  //Load the array from local storage and update the BehaviorSubject
   private loadArrayFromLocalStorage(): void {
     const storedArray = localStorage.getItem('myArray');
     if (storedArray) {
@@ -28,6 +29,6 @@ export class LocalStorageService {
     const newArray = [...currentArray, item];
     this.myArraySubject.next(newArray);
     localStorage.setItem('myArray', JSON.stringify(newArray));
-    console.log(newArray)
+    console.log(newArray);
   }
 }

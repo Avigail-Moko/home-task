@@ -175,13 +175,14 @@ export class WellcomeComponent {
  
 }
 
+
 openSnackBar(message: string) {
   const snackBarRef = this._snackBar.open(message);
   setTimeout(() => {
     snackBarRef.dismiss();
   }, 7000); 
-}
 
+}
 
 
 
