@@ -9,8 +9,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {Component} from '@angular/core';
-import {MatMenuModule} from '@angular/material/menu';
 import {MatCardModule} from '@angular/material/card';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatRadioModule} from '@angular/material/radio';
@@ -18,9 +16,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
+import { MatChipsModule} from '@angular/material/chips';
 import {MatRippleModule} from '@angular/material/core';
-import {FormBuilder, Validators} from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -48,8 +45,7 @@ const modules = [
     MatRippleModule,
     MatSnackBarModule,
     MatTableModule,
-    MatTabsModule
-    
+    MatTabsModule,  
 ]
 
 @NgModule({

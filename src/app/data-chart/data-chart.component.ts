@@ -1,100 +1,108 @@
 import { Component } from '@angular/core';
 import { LocalStorageService } from '../local-storage.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-data-chart',
   templateUrl: './data-chart.component.html',
-  styleUrls: ['./data-chart.component.scss']
+  styleUrls: ['./data-chart.component.scss'],
 })
 export class DataChartComponent {
+  constructor(private localStorageService: LocalStorageService) {}
+  myArray: any[] = [];
+  maleCount = 0;
+  femaleCount = 0;
 
-  constructor(private localStorageService: LocalStorageService) { }
+  ngOnInit() {
+    this.countGenders();
+  }
 
-  ngOnInit(){
-    this.localStorageService.getMyArray().subscribe((data)=>{
-      const processedDataY =this.processedDataY(data)
-      const processedDatalabel =this.processedDatalabel(data)
-    })
+  countGenders(): void {
+    this.localStorageService.getMyArray().subscribe((data: any[]) => {
+      data.forEach((person) => {
+        console.log('gender:', person.gender);
+        if (person.gender === 'Male') {
+          this.maleCount++;
+        } else if (person.gender === 'Female') {
+          this.femaleCount++;
+        }
+      });
+      this.myArray = data;
+      this.updateChartData();
+    });
   }
-  processedDataY(data: any[]):any {
-      const processedDataY = data.map(item => ({
-        y: item.personalDetails.amountOfSeats, // לפי כמות המושבים
-      }));
-      // החזרת הנתונים המוכנים לשימוש בגרף
-      return processedDataY;
-    
-    
+
+  updateChartData(): void {
+    this.columnChartOptions.data[0].dataPoints = [
+      { label: 'men', y: this.maleCount },
+      { label: 'women', y: this.femaleCount },
+    ];
   }
-  processedDatalabel(data: any[]):any {
-    const processedDataLabel = data.map(item => ({
-      label: item.personalDetails.motorType // לפי סוג המנוע
-    }));
-    // החזרת הנתונים המוכנים לשימוש בגרף
-    return processedDataLabel;
-  
-  
-}
+
   columnChartOptions = {
-      animationEnabled: true,
-      title: {
+    animationEnabled: true,
+    title: {
       text: 'Angular Column Chart in Material UI Tabs',
-      },
-      data: [
+    },
+    data: [
       {
-          // Change type to "doughnut", "line", "splineArea", etc.
-          type: 'column',
-          dataPoints: [
-          { label: 'apple', y: 10 },
-          { label: 'orange', y: 15 },
-          { label: 'banana', y: 25 },
-          { label: 'mango', y: 30 },
-          { label: 'grape', y: 28 },
-          ],
+        // Change type to "doughnut", "line", "splineArea", etc.
+        type: 'column',
+        // indexLabel:'{label}:{y}',
+        dataPoints: [
+          { label: 'loading', y: 0 },
+        ],
       },
-      ],
-      
+      {
+        // Change type to "doughnut", "line", "splineArea", etc.
+        type: 'column',
+        // indexLabel:'{label}:{y}',
+        dataPoints: [
+          // { label: 'men', y: this.maleCount },
+          // { label: 'women', y: this.femaleCount },
+        ],
+      },
+    ],
   };
 
   pieChartOptions = {
-      animationEnabled: true,
-      title: {
+    animationEnabled: true,
+    title: {
       text: 'Most picked engine type by Gender',
-      },
-      theme: 'light2', // "light1", "dark1", "dark2"
-      showInLegend: true,
-        toolTipContent: "{name}: <strong>{y}%</strong>",
-        indexLabel: "{name} - {y}%",
-      data: [
+    },
+    theme: 'light2', // "light1", "dark1", "dark2"
+    showInLegend: true,
+    toolTipContent: '{name}: <strong>{y}%</strong>',
+    indexLabel: '{name} - {y}%',
+    data: [
       {
-          type: 'pie',
-          dataPoints: 
-          [
-            { y: this.processedDataY, label: this.processedDatalabel, },
-            { y: 20, label: "male,electric" },
-            { y: 30, label: "female,fuel" },
-            { y: 10, label: "female, electric" }
-          ],
+        type: 'pie',
+        dataPoints: [
+          { y: 20, label: 'male,electric' },
+          { y: 30, label: 'female,fuel' },
+          { y: 10, label: 'female, electric' },
+        ],
       },
-      ],
+    ],
   };
 
   lineChartOptions = {
-      animationEnabled: true,
-      title: {
+    animationEnabled: true,
+    title: {
       text: 'Angular Line Chart in Material UI Tabs',
-      },
-      theme: 'light2', // "light1", "dark1", "dark2"
-      data: [
+    },
+    theme: 'light2', // "light1", "dark1", "dark2"
+    data: [
       {
-          type: 'line',
-          dataPoints: [
+        type: 'line',
+        dataPoints: [
           { label: 'apple', y: 10 },
           { label: 'orange', y: 15 },
           { label: 'banana', y: 25 },
           { label: 'mango', y: 30 },
           { label: 'grape', y: 28 },
-          ],
+        ],
       },
-      ],
+    ],
   };
 }

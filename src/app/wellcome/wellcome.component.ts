@@ -1,18 +1,14 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { Component, ElementRef, ViewChild, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import {
-  MatAutocompleteSelectedEvent,
-  MatAutocompleteModule,
-} from '@angular/material/autocomplete';
+import { Component, ElementRef, ViewChild, inject,Renderer2 } from '@angular/core';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Observable, map, startWith } from 'rxjs';
 import { LocalStorageService } from '../local-storage.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-wellcome',
@@ -21,16 +17,13 @@ import { Router } from '@angular/router';
   providers: [
     {
       provide: STEPPER_GLOBAL_OPTIONS,
-      useValue: {showError: true},
+      useValue: { showError: true },
     },
   ],
 })
 export class WellcomeComponent {
-  color: string = 'green';
-  myForm: FormGroup;
-  errorMessage='';
-
-
+  color: string = '';
+  errorMessage = '';
   separatorKeysCodes: number[] = [ENTER, COMMA];
   hobbyCtrl = new FormControl('');
   filteredHobbies: Observable<string[]>;
@@ -42,24 +35,20 @@ export class WellcomeComponent {
 
   announcer = inject(LiveAnnouncer);
 
-  constructor(private fb:FormBuilder,
+  constructor(
     private formBuild: FormBuilder,
     private localStorageService: LocalStorageService,
     private _snackBar: MatSnackBar,
-    private router: Router,) {
+    private router: Router,
+    private renderer: Renderer2, private el: ElementRef
+  ) {
     this.filteredHobbies = this.hobbyCtrl.valueChanges.pipe(
       startWith(null),
       map((fruit: string | null) =>
         fruit ? this._filter(fruit) : this.allHobbies.slice()
       )
     );
-    this.myForm=this.fb.group({
-      name: [''],
-      subject:[''],
-      seniority:[''],
-      email: [''],
-      password: [''],
-    })
+
   }
 
   firstFormGroup = this.formBuild.group({
@@ -92,7 +81,6 @@ export class WellcomeComponent {
     MotorType: ['', Validators.required],
   });
 
-  
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
@@ -130,61 +118,46 @@ export class WellcomeComponent {
       hobby.toLowerCase().includes(filterValue)
     );
   }
-  onColorChange(newColor: string) {
-    this.color = newColor;
+  onColorChange(color: string) {
+    this.seventhFormGroup.get('FavoriteColor')?.setValue(color);
+    this.renderer.setStyle(this.el.nativeElement.querySelector('.car__body'), 'fill', color); 
   }
 
-  //reset local storage
+  
+  
+  // reset local storage
   // ngOnInit(){
   //   localStorage.clear();
   // }
-  
+
   saveUserData() {
     const newPersonData = {
-      personalDetails: {
-        fullName: this.firstFormGroup.value.FullName,
-        gender: this.secondFormGroup.value.Gender,
-        emailAddress: this.thirdFormGroup.value.EmailAddress,
-        birthDate: this.fourthFormGroup.value.BirthDate,
-        address: this.fifthFormGroup.value.Address,
-        city: this.fifthFormGroup.value.City,
-        country: this.fifthFormGroup.value.Country,
-        hobbies: this.sixthFormGroup.value.Hobbies,
-        favoriteColor: this.color,
-        amountOfSeats: this.eighthFormGroup.value.AmountOfSeats,
-        motorType: this.ninthFormGroup.value.MotorType,
-      }
+      fullName: this.firstFormGroup.value.FullName,
+      gender: this.secondFormGroup.value.Gender,
+      emailAddress: this.thirdFormGroup.value.EmailAddress,
+      birthDate: this.fourthFormGroup.value.BirthDate,
+      address: this.fifthFormGroup.value.Address,
+      city: this.fifthFormGroup.value.City,
+      country: this.fifthFormGroup.value.Country,
+      hobbies: this.sixthFormGroup.value.Hobbies,
+      favoriteColor: this.seventhFormGroup.value.FavoriteColor,
+      amountOfSeats: this.eighthFormGroup.value.AmountOfSeats,
+      motorType: this.ninthFormGroup.value.MotorType,
     };
     this.localStorageService.pushItemToMyArray(newPersonData);
-
-   
-    this.clearForm(); 
+    sessionStorage.setItem('reload', 'reload');
+    window.location.reload();
   }
-  
-  clearForm() {
-    // ניקוי כל שדות הטופס לאחר הוספת הנתונים למערך
-    this.firstFormGroup.reset();
-    this.secondFormGroup.reset();
-    this.thirdFormGroup.reset();
-    this.fourthFormGroup.reset();
-    this.fifthFormGroup.reset();
-    this.sixthFormGroup.reset();
-    this.seventhFormGroup.reset();
-    this.eighthFormGroup.reset();
-    this.ninthFormGroup.reset();
- 
-}
 
-
-openSnackBar(message: string) {
-  const snackBarRef = this._snackBar.open(message);
-  setTimeout(() => {
-    snackBarRef.dismiss();
-  }, 7000); 
-
-}
-
-
-
-
+  ngOnInit() {
+    if ('reload' in sessionStorage) {
+      const snackBarRef = this._snackBar.open(
+        'Thank you very much! Your request has been submitted, and an email with the perfect match will be sent to you shortly.'
+      );
+      setTimeout(() => {
+        snackBarRef.dismiss();
+      }, 7000);
+    }
+    sessionStorage.removeItem('reload');
+  }
 }

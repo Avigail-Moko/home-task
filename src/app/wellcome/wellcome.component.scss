@@ -6,10 +6,10 @@
 }
 .colorPicker {
   margin: 1% 1%;
-  border: none;
+  border: 0.5px rgba(0, 0, 0, 0.3) solid;
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
 }
 .matlable {
   display: block;
@@ -30,3 +30,10 @@
   margin-top: 4px;
 }
 
+.car{
+  margin-left: 50px;
+}
+
+.car__body {
+  fill: var(--car-color); /* צבע המכונית */
+}

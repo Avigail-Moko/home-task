@@ -19,7 +19,7 @@ export class LocalStorageService {
     }
   }
 
-  public getMyArray(): Observable<string[]> {
+  public getMyArray(): Observable<any> {
     return this.myArraySubject.asObservable();
   }
 
@@ -29,6 +29,7 @@ export class LocalStorageService {
     const newArray = [...currentArray, item];
     this.myArraySubject.next(newArray);
     localStorage.setItem('myArray', JSON.stringify(newArray));
-    console.log(newArray);
+
+    console.log(localStorage.getItem('myArray'));
   }
 }
