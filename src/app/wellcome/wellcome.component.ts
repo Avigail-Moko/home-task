@@ -17,7 +17,7 @@ import {
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Observable, map, startWith } from 'rxjs';
-import { LocalStorageService } from '../local-storage.service';
+import { AiCarDealershipService } from '../ai-car-dealership.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
@@ -35,12 +35,13 @@ import { Router } from '@angular/router';
 export class WellcomeComponent {
   color: string = '';
   errorMessage = '';
+  visitorsCounter = 0;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   hobbyCtrl = new FormControl('');
   filteredHobbies: Observable<string[]>;
   hobbies: string[] = [];
   allHobbies: string[] = ['Sport', 'Nature', 'Cooking', 'Music', 'Art'];
-  
+
   @ViewChild('hobbyInput')
   hobbyInput!: ElementRef<HTMLInputElement>;
 
@@ -48,7 +49,7 @@ export class WellcomeComponent {
 
   constructor(
     private formBuild: FormBuilder,
-    private localStorageService: LocalStorageService,
+    private aiCarService: AiCarDealershipService,
     private _snackBar: MatSnackBar,
     private router: Router,
     private renderer: Renderer2,
@@ -83,7 +84,7 @@ export class WellcomeComponent {
   //   Hobbies: this.formBuild.array([], Validators.required),
   // });
   sixthFormGroup = this.formBuild.group({
-    Hobbies: ['' ,Validators.required],
+    Hobbies: ['', Validators.required],
   });
   seventhFormGroup = this.formBuild.group({
     FavoriteColor: ['', Validators.required],
@@ -125,7 +126,6 @@ export class WellcomeComponent {
     this.hobbyCtrl.setValue(null);
     this.sixthFormGroup.get('Hobbies')?.setValue(event.option.viewValue);
 
-    
     // hobbiesArray.push(this.formBuild.control(event.option.viewValue));
     console.log(this.sixthFormGroup);
   }
@@ -160,7 +160,7 @@ export class WellcomeComponent {
       amountOfSeats: this.eighthFormGroup.value.AmountOfSeats,
       motorType: this.ninthFormGroup.value.MotorType,
     };
-    this.localStorageService.pushItemToMyArray(newPersonData);
+    this.aiCarService.pushItemToMyArray(newPersonData);
     sessionStorage.setItem('reload', 'reload');
     window.location.reload();
   }
@@ -178,4 +178,5 @@ export class WellcomeComponent {
     }
     sessionStorage.removeItem('reload');
   }
+  
 }

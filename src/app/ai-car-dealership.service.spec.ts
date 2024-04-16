@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { LocalStorageService } from './local-storage.service';
+import { AiCarDealershipService } from './ai-car-dealership.service';
 
 describe('LocalStorageService', () => {
-  let service: LocalStorageService;
+  let service: AiCarDealershipService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(LocalStorageService);
+    service = TestBed.inject(AiCarDealershipService);
   });
 
   it('should be created', () => {

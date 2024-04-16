@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LocalStorageService } from '../local-storage.service';
+import { AiCarDealershipService } from '../ai-car-dealership.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./data-chart.component.scss'],
 })
 export class DataChartComponent {
-  constructor(private localStorageService: LocalStorageService) {}
+  constructor(private aiCarService: AiCarDealershipService) {}
   myArray: any[] = [];
   menFuelCounter = 0;
   womenFuelCounter = 0;
@@ -30,7 +30,8 @@ export class DataChartComponent {
   artCounter = 0;
   otherCounter = 0;
   hobbiesArray = ['sport', 'nature', 'cooking', 'music', 'art', 'other'];
-  myOrange: any;
+  // myOrange: any;
+  visitorsCounter: any;
 
   ngOnInit() {
     this.countGenders();
@@ -39,7 +40,7 @@ export class DataChartComponent {
   }
 
   countGenders(): void {
-    this.localStorageService.getMyArray().subscribe((data: any[]) => {
+    this.aiCarService.getMyArray().subscribe((data: any[]) => {
       data.forEach((person) => {
         if (person.gender === 'Male') {
           if (person.motorType === 'Fuel') {
@@ -87,7 +88,7 @@ export class DataChartComponent {
     ];
   }
   seatsDistribution() {
-    this.localStorageService.getMyArray().subscribe((data: any[]) => {
+    this.aiCarService.getMyArray().subscribe((data: any[]) => {
       data.forEach((person) => {
         console.log('person');
         if (person.amountOfSeats == 2) {
@@ -105,32 +106,32 @@ export class DataChartComponent {
     this.updateChartData();
   }
   commonHobby() {
-    this.localStorageService.getMyArray().subscribe((data: any[]) => {
+    this.aiCarService.getMyArray().subscribe((data: any[]) => {
       data.forEach((person) => {
-        if (person.hobbies==='Sport') {
+        if (person.hobbies === 'Sport') {
           this.sportCounter++;
         }
-        if (person.hobbies==='Nature') {
+        if (person.hobbies === 'Nature') {
           this.natureCounter++;
         }
-        if (person.hobbies==='Cooking') {
+        if (person.hobbies === 'Cooking') {
           this.cookingCounter++;
         }
-        if (person.hobbies==='Music') {
+        if (person.hobbies === 'Music') {
           this.musicCounter++;
         }
-        if (person.hobbies==='Art') {
+        if (person.hobbies === 'Art') {
           this.artCounter++;
         }
-        if (person.hobbies==='other') {
+        if (person.hobbies === 'other') {
           this.otherCounter++;
         }
         console.log('person is working', person.hobbies);
-        
       });
     });
     this.updateChartData();
   }
+ 
 
   columnChartOptions = {
     animationEnabled: true,

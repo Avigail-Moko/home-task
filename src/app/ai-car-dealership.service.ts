@@ -4,10 +4,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class LocalStorageService {
+export class AiCarDealershipService {
   private myArraySubject = new BehaviorSubject<string[]>([]);
-
-  constructor() {
+    constructor() {
     this.loadArrayFromLocalStorage();
   }
 
@@ -32,4 +31,5 @@ export class LocalStorageService {
 
     console.log(localStorage.getItem('myArray'));
   }
+  
 }
