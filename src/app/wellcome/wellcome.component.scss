@@ -6,7 +6,7 @@
 }
 .colorPicker {
   margin: 1% 1%;
-  border: 0.5px rgba(0, 0, 0, 0.3) solid;
+  border: 0.5px rgba(0, 0, 0, 0.4) solid;
   border-radius: 50%;
   width: 25px;
   height: 25px;
@@ -31,7 +31,9 @@
 }
 
 .car{
-  margin-left: 50px;
+  width: 150px;
+  height: 130px;
+  margin-left: 40px;
 }
 
 .car__body {

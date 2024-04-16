@@ -18,6 +18,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DataChartComponent } from './data-chart/data-chart.component';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AdminDialogComponent } from './admin-dialog/admin-dialog.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +29,7 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
     WellcomeComponent,
     DashboardComponent,
     DataChartComponent,
+    AdminDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +39,10 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
     ColorPickerModule,
     MatAutocompleteModule,
     FlexLayoutModule,
-    CanvasJSAngularChartsModule
+    CanvasJSAngularChartsModule,
+    CommonModule,
+    RouterOutlet,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

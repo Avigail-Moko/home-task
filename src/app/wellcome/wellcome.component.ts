@@ -1,8 +1,19 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { Component, ElementRef, ViewChild, inject,Renderer2 } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import {
+  Component,
+  ElementRef,
+  ViewChild,
+  inject,
+  Renderer2,
+} from '@angular/core';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Observable, map, startWith } from 'rxjs';
@@ -29,7 +40,7 @@ export class WellcomeComponent {
   filteredHobbies: Observable<string[]>;
   hobbies: string[] = [];
   allHobbies: string[] = ['Sport', 'Nature', 'Cooking', 'Music', 'Art'];
-
+  
   @ViewChild('hobbyInput')
   hobbyInput!: ElementRef<HTMLInputElement>;
 
@@ -40,7 +51,8 @@ export class WellcomeComponent {
     private localStorageService: LocalStorageService,
     private _snackBar: MatSnackBar,
     private router: Router,
-    private renderer: Renderer2, private el: ElementRef
+    private renderer: Renderer2,
+    private el: ElementRef
   ) {
     this.filteredHobbies = this.hobbyCtrl.valueChanges.pipe(
       startWith(null),
@@ -48,7 +60,6 @@ export class WellcomeComponent {
         fruit ? this._filter(fruit) : this.allHobbies.slice()
       )
     );
-
   }
 
   firstFormGroup = this.formBuild.group({
@@ -58,7 +69,7 @@ export class WellcomeComponent {
     Gender: ['', Validators.required],
   });
   thirdFormGroup = this.formBuild.group({
-    EmailAddress: ['', Validators.required],
+    EmailAddress: ['', Validators.email],
   });
   fourthFormGroup = this.formBuild.group({
     BirthDate: ['', Validators.required],
@@ -68,8 +79,11 @@ export class WellcomeComponent {
     City: ['', Validators.required],
     Country: ['', Validators.required],
   });
+  // sixthFormGroup = this.formBuild.group({
+  //   Hobbies: this.formBuild.array([], Validators.required),
+  // });
   sixthFormGroup = this.formBuild.group({
-    Hobbies: ['', Validators.required],
+    Hobbies: ['' ,Validators.required],
   });
   seventhFormGroup = this.formBuild.group({
     FavoriteColor: ['', Validators.required],
@@ -109,6 +123,11 @@ export class WellcomeComponent {
     this.hobbies.push(event.option.viewValue);
     this.hobbyInput.nativeElement.value = '';
     this.hobbyCtrl.setValue(null);
+    this.sixthFormGroup.get('Hobbies')?.setValue(event.option.viewValue);
+
+    
+    // hobbiesArray.push(this.formBuild.control(event.option.viewValue));
+    console.log(this.sixthFormGroup);
   }
 
   private _filter(value: string): string[] {
@@ -120,15 +139,12 @@ export class WellcomeComponent {
   }
   onColorChange(color: string) {
     this.seventhFormGroup.get('FavoriteColor')?.setValue(color);
-    this.renderer.setStyle(this.el.nativeElement.querySelector('.car__body'), 'fill', color); 
+    this.renderer.setStyle(
+      this.el.nativeElement.querySelector('.car__body'),
+      'fill',
+      color
+    );
   }
-
-  
-  
-  // reset local storage
-  // ngOnInit(){
-  //   localStorage.clear();
-  // }
 
   saveUserData() {
     const newPersonData = {
@@ -150,6 +166,8 @@ export class WellcomeComponent {
   }
 
   ngOnInit() {
+    // reset local storage
+    // localStorage.clear();
     if ('reload' in sessionStorage) {
       const snackBarRef = this._snackBar.open(
         'Thank you very much! Your request has been submitted, and an email with the perfect match will be sent to you shortly.'

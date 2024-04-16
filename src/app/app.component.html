@@ -7,14 +7,16 @@
       mat-icon-button
       class="example-icon"
       aria-label="Example icon-button with menu icon"
-      (click)="createRouter()"
+      (click)="openDialog()"
     >
       <mat-icon>computer</mat-icon>
+    </button>
+    <button (click)="goForward()" matTooltip="take me back" mat-icon-button><mat-icon>arrow_forward_ios</mat-icon>
     </button>
   </mat-toolbar>
   <router-outlet></router-outlet>
 
-  <app-data-chart></app-data-chart>
+  <!-- <app-data-chart></app-data-chart> -->
 
   <footer class="pmd-footer bg-dark pmd-footer-dark footer">
     <div class="container">
