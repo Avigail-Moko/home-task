@@ -138,7 +138,7 @@ export class WellcomeComponent {
 
     setTimeout(() => {
       window.location.reload();
-    }, 1000);
+    }, 600);
   }
 
   ngOnInit() {

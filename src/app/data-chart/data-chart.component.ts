@@ -179,7 +179,7 @@ export class DataChartComponent {
     data: [
       {
         type: 'pie',
-        indexLabel: '{label} - {y}%',
+        indexLabel: '{label} - {y}',
         dataPoints: [
           { y: 10, label: '2 seats' },
           { y: 40, label: '5 seats' },
