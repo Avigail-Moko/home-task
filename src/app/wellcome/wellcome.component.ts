@@ -1,25 +1,12 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import {
-  Component,
-  ElementRef,
-  ViewChild,
-  inject,
-  Renderer2,
-} from '@angular/core';
-import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  Validators,
-} from '@angular/forms';
+import {Component,ElementRef,ViewChild,inject,Renderer2} from '@angular/core';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { MatChipInputEvent } from '@angular/material/chips';
 import { Observable, map, startWith } from 'rxjs';
 import { AiCarDealershipService } from '../ai-car-dealership.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-wellcome',
@@ -34,7 +21,7 @@ import { Router } from '@angular/router';
 })
 export class WellcomeComponent {
   color: string = '';
-  flag:boolean=false
+  flag: boolean = false;
   errorMessage = '';
   visitorsCounter = 0;
   separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -52,7 +39,6 @@ export class WellcomeComponent {
     private formBuild: FormBuilder,
     private aiCarService: AiCarDealershipService,
     private _snackBar: MatSnackBar,
-    private router: Router,
     private renderer: Renderer2,
     private el: ElementRef
   ) {
@@ -82,7 +68,8 @@ export class WellcomeComponent {
     Country: ['', Validators.required],
   });
   sixthFormGroup = this.formBuild.group({
-    Hobbies: [this.formBuild.array([], Validators.required)]  });
+    Hobbies: [this.formBuild.array([], Validators.required)],
+  });
 
   seventhFormGroup = this.formBuild.group({
     FavoriteColor: ['', Validators.required],
@@ -102,8 +89,6 @@ export class WellcomeComponent {
 
       this.announcer.announce(`Removed ${hobby}`);
       this.sixthFormGroup.get('Hobbies')?.setValue(this.hobbies);
-      console.log('six',this.sixthFormGroup)
-
     }
   }
 
@@ -112,7 +97,6 @@ export class WellcomeComponent {
     this.hobbyInput.nativeElement.value = '';
     this.hobbyCtrl.setValue(null);
     this.sixthFormGroup.get('Hobbies')?.setValue(this.hobbies);
-    console.log(this.sixthFormGroup);
   }
 
   private _filter(value: string): string[] {
@@ -149,7 +133,12 @@ export class WellcomeComponent {
     };
     this.aiCarService.pushItemToMyArray(newPersonData);
     sessionStorage.setItem('reload', 'reload');
-    window.location.reload();
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   }
 
   ngOnInit() {
@@ -163,7 +152,7 @@ export class WellcomeComponent {
     }
     sessionStorage.removeItem('reload');
   }
-  motorSelect(){
-    this.flag=true
+  motorSelect() {
+    this.flag = true;
   }
 }

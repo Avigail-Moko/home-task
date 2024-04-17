@@ -10,21 +10,23 @@ import { AuthGuardService } from './auth-guard.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(private router: Router, private dialog: Dialog, private authGuard: AuthGuardService ) {}
-  flag=false;
+  constructor(
+    private router: Router,
+    private dialog: Dialog,
+    private authGuard: AuthGuardService
+  ) {}
+  flag = false;
   title = 'home-task';
   createRouter() {
     this.router.navigate(['/data-chart']);
-    this.flag=true;
+    this.flag = true;
   }
 
   goForward() {
     this.router.navigate(['/']);
-    this.flag=false;
+    this.flag = false;
   }
   openDialog() {
     this.dialog.open(AdminDialogComponent);
   }
-
-  }
-
+}

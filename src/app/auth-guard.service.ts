@@ -1,16 +1,11 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  Router,
-} from '@angular/router';
-
+import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuardService implements CanActivate {
-  private dialogOpened: boolean = false;
+export class AuthGuardService {
+  
   constructor(private router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
@@ -22,4 +17,5 @@ export class AuthGuardService implements CanActivate {
       return false;
     }
   }
+
 }

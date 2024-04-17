@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { AiCarDealershipService } from '../ai-car-dealership.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-data-chart',
@@ -47,10 +46,8 @@ export class DataChartComponent {
           }
         }
         this.myArray = data;
-        console.log(this.myArray);
 
         this.updateChartData();
-        console.log(this.womenElectricCounter);
       });
     });
   }
@@ -80,16 +77,12 @@ export class DataChartComponent {
   seatsDistribution() {
     this.aiCarService.getMyArray().subscribe((data: any[]) => {
       data.forEach((person) => {
-        console.log('person');
         if (person.amountOfSeats == 2) {
           this.twoSeatsCounter++;
-          console.log('2', this.twoSeatsCounter);
         } else if (person.amountOfSeats == 5) {
           this.fiveSeatsCounter++;
-          console.log('5', this.fiveSeatsCounter);
         } else if (person.amountOfSeats == 7) {
           this.sevenSeatsCounter++;
-          console.log('7', this.sevenSeatsCounter);
         }
       });
     });
@@ -98,22 +91,23 @@ export class DataChartComponent {
   commonHobby() {
     this.aiCarService.getMyArray().subscribe((data: any[]) => {
       data.forEach((person) => {
-        if (person.hobbies === 'Sport') {
-          this.sportCounter++;
+        for (let index = 0; index < person.hobbies.length; index++) {
+          if (person.hobbies[index] === 'Sport') {
+            this.sportCounter++;
+          }
+          if (person.hobbies[index] === 'Nature') {
+            this.natureCounter++;
+          }
+          if (person.hobbies[index] === 'Cooking') {
+            this.cookingCounter++;
+          }
+          if (person.hobbies[index] === 'Music') {
+            this.musicCounter++;
+          }
+          if (person.hobbies[index] === 'Art') {
+            this.artCounter++;
+          }
         }
-        if (person.hobbies === 'Nature') {
-          this.natureCounter++;
-        }
-        if (person.hobbies === 'Cooking') {
-          this.cookingCounter++;
-        }
-        if (person.hobbies === 'Music') {
-          this.musicCounter++;
-        }
-        if (person.hobbies === 'Art') {
-          this.artCounter++;
-        }
-        console.log('person is working', person.hobbies);
       });
     });
     this.updateChartData();

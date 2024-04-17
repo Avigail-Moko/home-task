@@ -29,7 +29,6 @@ export class AiCarDealershipService {
     this.myArraySubject.next(newArray);
     localStorage.setItem('myArray', JSON.stringify(newArray));
 
-    console.log(localStorage.getItem('myArray'));
   }
 
 }
