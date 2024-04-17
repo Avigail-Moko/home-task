@@ -169,17 +169,12 @@ export class DataChartComponent {
       text: 'Seats Amount Distribution',
     },
     theme: 'light2',
-    axisY: {
-      title: '2 seats',
-    },
-    axisY2: {
-      title: '5 seats',
-    },
+
 
     data: [
       {
         type: 'pie',
-        indexLabel: '{label} - {y}%',
+        indexLabel: '{label} : {y}',
         dataPoints: [
           { y: 10, label: '2 seats' },
           { y: 40, label: '5 seats' },
