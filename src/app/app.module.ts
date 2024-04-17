@@ -7,11 +7,7 @@ import { WellcomeComponent } from './wellcome/wellcome.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { ColorPickerModule } from 'ngx-color-picker';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { ElementRef, ViewChild, inject } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import {
-  MatAutocompleteSelectedEvent,
   MatAutocompleteModule,
 } from '@angular/material/autocomplete';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -22,6 +18,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AdminDialogComponent } from './admin-dialog/admin-dialog.component';
+import {CdkTableModule} from '@angular/cdk/table';
 
 @NgModule({
   declarations: [
@@ -42,7 +39,8 @@ import { AdminDialogComponent } from './admin-dialog/admin-dialog.component';
     CanvasJSAngularChartsModule,
     CommonModule,
     RouterOutlet,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CdkTableModule
   ],
   providers: [],
   bootstrap: [AppComponent],

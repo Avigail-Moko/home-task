@@ -34,6 +34,7 @@ import { Router } from '@angular/router';
 })
 export class WellcomeComponent {
   color: string = '';
+  flag:boolean=false
   errorMessage = '';
   visitorsCounter = 0;
   separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -80,12 +81,9 @@ export class WellcomeComponent {
     City: ['', Validators.required],
     Country: ['', Validators.required],
   });
-  // sixthFormGroup = this.formBuild.group({
-  //   Hobbies: this.formBuild.array([], Validators.required),
-  // });
   sixthFormGroup = this.formBuild.group({
-    Hobbies: ['', Validators.required],
-  });
+    Hobbies: [this.formBuild.array([], Validators.required)]  });
+
   seventhFormGroup = this.formBuild.group({
     FavoriteColor: ['', Validators.required],
   });
@@ -96,20 +94,6 @@ export class WellcomeComponent {
     MotorType: ['', Validators.required],
   });
 
-  add(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
-
-    // Add our fruit
-    if (value) {
-      this.hobbies.push(value);
-    }
-
-    // Clear the input value
-    event.chipInput!.clear();
-
-    this.hobbyCtrl.setValue(null);
-  }
-
   remove(hobby: string): void {
     const index = this.hobbies.indexOf(hobby);
 
@@ -117,6 +101,9 @@ export class WellcomeComponent {
       this.hobbies.splice(index, 1);
 
       this.announcer.announce(`Removed ${hobby}`);
+      this.sixthFormGroup.get('Hobbies')?.setValue(this.hobbies);
+      console.log('six',this.sixthFormGroup)
+
     }
   }
 
@@ -124,9 +111,7 @@ export class WellcomeComponent {
     this.hobbies.push(event.option.viewValue);
     this.hobbyInput.nativeElement.value = '';
     this.hobbyCtrl.setValue(null);
-    this.sixthFormGroup.get('Hobbies')?.setValue(event.option.viewValue);
-
-    // hobbiesArray.push(this.formBuild.control(event.option.viewValue));
+    this.sixthFormGroup.get('Hobbies')?.setValue(this.hobbies);
     console.log(this.sixthFormGroup);
   }
 
@@ -145,13 +130,15 @@ export class WellcomeComponent {
       color
     );
   }
-
+  formatDate(date: any): string {
+    return date.toLocaleDateString();
+  }
   saveUserData() {
     const newPersonData = {
       fullName: this.firstFormGroup.value.FullName,
       gender: this.secondFormGroup.value.Gender,
       emailAddress: this.thirdFormGroup.value.EmailAddress,
-      birthDate: this.fourthFormGroup.value.BirthDate,
+      birthDate: this.formatDate(this.fourthFormGroup.value.BirthDate),
       address: this.fifthFormGroup.value.Address,
       city: this.fifthFormGroup.value.City,
       country: this.fifthFormGroup.value.Country,
@@ -166,8 +153,6 @@ export class WellcomeComponent {
   }
 
   ngOnInit() {
-    // reset local storage
-    // localStorage.clear();
     if ('reload' in sessionStorage) {
       const snackBarRef = this._snackBar.open(
         'Thank you very much! Your request has been submitted, and an email with the perfect match will be sent to you shortly.'
@@ -178,5 +163,7 @@ export class WellcomeComponent {
     }
     sessionStorage.removeItem('reload');
   }
-  
+  motorSelect(){
+    this.flag=true
+  }
 }

@@ -2,6 +2,8 @@ import { Dialog } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AiCarDealershipService } from '../ai-car-dealership.service';
+import { AuthGuardService } from '../auth-guard.service';
 
 @Component({
   selector: 'app-admin-dialog',
@@ -9,16 +11,24 @@ import { Router } from '@angular/router';
   styleUrls: ['./admin-dialog.component.scss'],
 })
 export class AdminDialogComponent {
-  constructor(private dialog: Dialog, private router: Router) {}
-  password = 'reflectiz147';
+  constructor(
+    private dialog: Dialog,
+    private router: Router,
+    private aiCarDealership: AiCarDealershipService,
+    private authGuard: AuthGuardService
+  ) {}
   userPassword: String = '';
   hide = true;
 
   isAdmin() {
-    // console.log(this.userPassword)
-    if (this.userPassword === this.password) {
-      this.dialog.closeAll();
-      this.router.navigate(['/data-chart']);
-    }else alert("try again")
+    this.router
+      .navigate(['/data-chart'], {
+        queryParams: { password: this.userPassword },
+      })
+      .then((success) => {
+        if (success) {
+          this.dialog.closeAll();
+        } else alert('wrong password. please try again');
+      });
   }
 }

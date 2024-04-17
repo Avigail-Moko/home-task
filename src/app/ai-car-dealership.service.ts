@@ -31,5 +31,5 @@ export class AiCarDealershipService {
 
     console.log(localStorage.getItem('myArray'));
   }
-  
+
 }

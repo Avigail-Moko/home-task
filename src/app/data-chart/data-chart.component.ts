@@ -17,21 +17,12 @@ export class DataChartComponent {
   twoSeatsCounter = 0;
   fiveSeatsCounter = 0;
   sevenSeatsCounter = 0;
-  // sport = ' ';
-  // nature = ' ';
-  // cooking = ' ';
-  // music = ' ';
-  // art = ' ';
-  // other = ' ';
   sportCounter = 0;
   natureCounter = 0;
   cookingCounter = 0;
   musicCounter = 0;
   artCounter = 0;
-  otherCounter = 0;
-  hobbiesArray = ['sport', 'nature', 'cooking', 'music', 'art', 'other'];
-  // myOrange: any;
-  visitorsCounter: any;
+  hobbiesArray = ['sport', 'nature', 'cooking', 'music', 'art'];
 
   ngOnInit() {
     this.countGenders();
@@ -84,7 +75,6 @@ export class DataChartComponent {
       { label: 'Cooking', y: this.cookingCounter },
       { label: 'Music', y: this.musicCounter },
       { label: 'Art', y: this.artCounter },
-      { label: 'Other', y: this.otherCounter },
     ];
   }
   seatsDistribution() {
@@ -123,15 +113,11 @@ export class DataChartComponent {
         if (person.hobbies === 'Art') {
           this.artCounter++;
         }
-        if (person.hobbies === 'other') {
-          this.otherCounter++;
-        }
         console.log('person is working', person.hobbies);
       });
     });
     this.updateChartData();
   }
- 
 
   columnChartOptions = {
     animationEnabled: true,
@@ -166,7 +152,6 @@ export class DataChartComponent {
     },
     data: [
       {
-        // Change type to "doughnut", "line", "splineArea", etc.
         type: 'column',
         name: 'men',
         legendText: 'men',
@@ -189,15 +174,20 @@ export class DataChartComponent {
     title: {
       text: 'Seats Amount Distribution',
     },
-    theme: 'light2', // "light1", "dark1", "dark2"
+    theme: 'light2',
+    axisY: {
+      title: '2 seats',
+    },
+    axisY2: {
+      title: '5 seats',
+    },
 
-    // toolTipContent: '{name}: <strong>{y}%</strong>',
-    // indexLabel: '{name} : {y}%',
     data: [
       {
         type: 'pie',
+        indexLabel: '{label} - {y}%',
         dataPoints: [
-          { y: 10, label: 'loading' },
+          { y: 10, label: '2 seats' },
           { y: 40, label: '5 seats' },
           { y: 50, label: '7 seats' },
         ],
@@ -210,17 +200,11 @@ export class DataChartComponent {
     title: {
       text: 'Most Common Hobby amongst Visitors',
     },
-    theme: 'light2', // "light1", "dark1", "dark2"
+    theme: 'light2',
     data: [
       {
         type: 'line',
-        dataPoints: [
-          { label: 'loading...', y: 0 },
-          // { label: 'orange', y: 15 },
-          // { label: 'banana', y: 25 },
-          // { label: 'mango', y: 30 },
-          // { label: 'grape', y: 28 },
-        ],
+        dataPoints: [{ label: 'loading...', y: 0 }],
       },
     ],
   };

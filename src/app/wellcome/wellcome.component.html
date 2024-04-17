@@ -185,7 +185,6 @@
                 </mat-chip-row>
               </mat-chip-grid>
               <input
-                placeholder="New hobby..."
                 #hobbyInput
                 [formControl]="hobbyCtrl"
                 [matChipInputFor]="chipGrid"
@@ -193,7 +192,6 @@
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                 formControlName="Hobbies"
                 required
-                (matChipInputTokenEnd)="add($event)"
               />
               <mat-autocomplete
                 #auto="matAutocomplete"
@@ -311,11 +309,11 @@
           <mat-radio-group
             aria-label="Select an option"
             formControlName="MotorType"
-            required
+            required 
           >
             <mat-label class="matlable">choose a motor type</mat-label>
-            <mat-radio-button value="Electric">Electric</mat-radio-button>
-            <mat-radio-button value="Fuel">Fuel</mat-radio-button>
+            <mat-radio-button value="Electric"  (click)="motorSelect()">Electric</mat-radio-button>
+            <mat-radio-button value="Fuel" (click)="motorSelect()">Fuel</mat-radio-button>
           </mat-radio-group>
         </p>
         <button mat-button matStepperPrevious>Back</button>
@@ -326,7 +324,7 @@
           color="accent"
           class="btn"
           (click)="saveUserData()"
-          [disabled]="!ngForm.valid"
+          [disabled]="!ngForm.valid ||!flag"
         >
           Send
         </button>

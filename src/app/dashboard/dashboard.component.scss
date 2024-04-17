@@ -1,3 +1,10 @@
-table {
-    width: 100%;
-  }
+
+ .toggle-group-container{
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+ }
+ .mat-elevation-z8 {
+  max-width: 50%;
+  overflow-x: auto;
+}

@@ -1,40 +1,47 @@
-<!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <div style="margin: 10px 10px;">
+ <h3>Please select your desired filtering criteria by clicking on the buttons below.</h3>
+   <h3>Keep in mind that you can choose up to three buttons at once to apply the desired filter.</h3>
+  <p style="display: flex; flex-direction: row;"><mat-button-toggle value="gender" [disabled]="counter>=3" (click)="genderTo()">Gender</mat-button-toggle>
+  <mat-button-toggle value="birthDate" [disabled]="counter>=3" (click)="birthDateTo()">Birth Date</mat-button-toggle>
+  <mat-button-toggle value="hobbies" [disabled]="counter>=3" (click)="hobbiesTo()">Hobbies</mat-button-toggle></p>
+ <p style="display: flex; flex-direction: row;"><mat-button-toggle value="favoriteColor" [disabled]="counter>=3" (click)="favoriteColorTo()">Favorite Color</mat-button-toggle>
+  <mat-button-toggle value="motorType" [disabled]="counter>=3" (click)="motorTypeTo()">Motor Type</mat-button-toggle>
+  <mat-button-toggle value="fullName" [disabled]="counter>=3" (click)="fullNameTo()">Full Name</mat-button-toggle></p>
+ </div>
 
-    <ng-container matColumnDef="FullName">
-    <th mat-header-cell *matHeaderCellDef>Full Name</th>
-    <td mat-cell *matCellDef="let element">{{ element.FullName }}</td>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
+  <ng-container matColumnDef="fullName">
+    <th mat-header-cell *matHeaderCellDef>fullName</th>
+    <td mat-cell *matCellDef="let element">{{ element.fullName }}</td>
   </ng-container>
 
-  <ng-container matColumnDef="Gender">
-    <th mat-header-cell *matHeaderCellDef>Gender</th>
-    <td mat-cell *matCellDef="let element">{{ element.Gender }}</td>
+  <ng-container matColumnDef="emailAddress">
+    <th mat-header-cell *matHeaderCellDef>emailAddress</th>
+    <td mat-cell *matCellDef="let element">{{ element.emailAddress }}</td>
   </ng-container>
 
-  <ng-container matColumnDef="EmailAddress">
-    <th mat-header-cell *matHeaderCellDef>Email Address</th>
-    <td mat-cell *matCellDef="let element">{{ element.EmailAddress }}</td>
+  <ng-container  matColumnDef="gender">
+    <th mat-header-cell *matHeaderCellDef>gender</th>
+    <td mat-cell *matCellDef="let element">{{ element.gender }}</td>
   </ng-container>
 
-  <ng-container matColumnDef="BirthDate">
-    <th mat-header-cell *matHeaderCellDef>Birth Date</th>
-    <td mat-cell *matCellDef="let element">{{ element.BirthDate }}</td>
+  <ng-container  matColumnDef="birthDate">
+    <th mat-header-cell *matHeaderCellDef>birthDate</th>
+    <td mat-cell *matCellDef="let element">{{ element.birthDate }}</td>
   </ng-container>
-
-  <ng-container matColumnDef="LocationDetails">
-    <th mat-header-cell *matHeaderCellDef>Location Details</th>
-    <td mat-cell *matCellDef="let element">{{ element.LocationDetails }}</td>
+  <ng-container  matColumnDef="hobbies">
+    <th mat-header-cell *matHeaderCellDef>hobbies</th>
+    <td mat-cell *matCellDef="let element">{{ element.hobbies }}</td>
+  </ng-container>
+  <ng-container matColumnDef="favoriteColor">
+    <th mat-header-cell *matHeaderCellDef>favoriteColor</th>
+    <td mat-cell *matCellDef="let element" [style.background-color]="element.favoriteColor"></td>
+  </ng-container>
+  <ng-container  matColumnDef="motorType">
+    <th mat-header-cell *matHeaderCellDef>motorType</th>
+    <td mat-cell *matCellDef="let element">{{ element.motorType }}</td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table> -->
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
-      <th mat-header-cell *matHeaderCellDef> {{ column }} </th>
-      <td mat-cell *matCellDef="let element" > {{ element.fullName }} </td>
-    </ng-container>
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-  
+</table>

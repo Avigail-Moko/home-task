@@ -21,6 +21,7 @@ import {MatRippleModule} from '@angular/material/core';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 
 const modules = [
@@ -46,6 +47,7 @@ const modules = [
     MatSnackBarModule,
     MatTableModule,
     MatTabsModule,  
+    MatButtonToggleModule
 ]
 
 @NgModule({
