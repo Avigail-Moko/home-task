@@ -19,7 +19,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     },
   ],
 })
-
 export class WellcomeComponent {
   maxDate = new Date();
   color: string = '';
