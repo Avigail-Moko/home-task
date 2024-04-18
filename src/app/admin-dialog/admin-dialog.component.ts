@@ -19,6 +19,7 @@ export class AdminDialogComponent {
   ) {}
   userPassword: String = '';
   hide = true;
+  
 
   isAdmin() {
     this.router

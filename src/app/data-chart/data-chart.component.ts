@@ -162,6 +162,7 @@ export class DataChartComponent {
       },
     ],
   };
+
   pieChartOptions = {
     animationEnabled: true,
     title: {
@@ -169,7 +170,6 @@ export class DataChartComponent {
     },
     theme: 'light2',
 
-    
     data: [
       {
         type: 'pie',

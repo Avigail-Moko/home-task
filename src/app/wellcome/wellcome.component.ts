@@ -22,6 +22,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 export class WellcomeComponent {
   maxDate = new Date();
+
   color: string = '';
   flag: boolean = false;
   errorMessage = '';
@@ -140,7 +141,11 @@ export class WellcomeComponent {
 
     setTimeout(() => {
       window.location.reload();
+<<<<<<< HEAD
     }, 600);
+=======
+    }, 1000);
+>>>>>>> 7c9f93fdd5e11107b76e043b1c0603dbdbe58d3c
   }
 
   ngOnInit() {
@@ -151,8 +156,13 @@ export class WellcomeComponent {
       setTimeout(() => {
         snackBarRef.dismiss();
       }, 7000);
+<<<<<<< HEAD
       sessionStorage.removeItem('reload');
     }
+=======
+    }
+    sessionStorage.removeItem('reload');
+>>>>>>> 7c9f93fdd5e11107b76e043b1c0603dbdbe58d3c
   }
   motorSelect() {
     this.flag = true;
