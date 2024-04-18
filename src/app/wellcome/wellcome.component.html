@@ -92,9 +92,13 @@
           <p class="paragraphOfDetails">
             <mat-form-field>
               <mat-label>Choose a date</mat-label>
-              <input matInput [matDatepicker]="picker"
-              formControlName="BirthDate" required <<<<<<< HEAD [max]="maxDate"
-              ======= >>>>>>> 7c9f93fdd5e11107b76e043b1c0603dbdbe58d3c />
+              <input
+                matInput
+                [matDatepicker]="picker"
+                formControlName="BirthDate"
+                required
+                [max]="maxDate"
+              />
               <mat-hint>M/D/Y</mat-hint>
               <mat-datepicker-toggle
                 matIconSuffix
