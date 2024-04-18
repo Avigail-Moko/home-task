@@ -168,12 +168,7 @@ export class DataChartComponent {
       text: 'Seats Amount Distribution',
     },
     theme: 'light2',
-<<<<<<< HEAD
 
-
-=======
-  
->>>>>>> 64966b85766d974a3af36f945db2ab3346acb781
     data: [
       {
         type: 'pie',
