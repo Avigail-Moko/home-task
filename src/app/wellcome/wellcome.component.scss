@@ -1,0 +1,41 @@
+.example-chip-list {
+  width: 100%;
+}
+.mat-mdc-radio-button ~ .mat-mdc-radio-button {
+  margin-left: 16px;
+}
+.colorPicker {
+  margin: 1% 1%;
+  border: 0.5px rgba(0, 0, 0, 0.4) solid;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+}
+.matlable {
+  display: block;
+}
+.form-container {
+  margin-left: 40px;
+}
+.wellcome {
+  margin: 40px 30px;
+}
+.btn {
+  margin: 1.5% 1.5%;
+}
+.card {
+  margin: 5% 10%;
+}
+.paragraphOfDetails {
+  margin-top: 4px;
+}
+
+.car{
+  width: 150px;
+  height: 130px;
+  margin-left: 40px;
+}
+
+.car__body {
+  fill: var(--car-color); /* צבע המכונית */
+}
