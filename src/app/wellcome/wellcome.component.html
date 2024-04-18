@@ -97,6 +97,7 @@
                 [matDatepicker]="picker"
                 formControlName="BirthDate"
                 required
+                [max]="maxDate"
               />
               <mat-hint>M/D/Y</mat-hint>
               <mat-datepicker-toggle
@@ -191,6 +192,8 @@
                 [matAutocomplete]="auto"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                 formControlName="Hobbies"
+                type="reset"
+                value=""
                 required
               />
               <mat-autocomplete

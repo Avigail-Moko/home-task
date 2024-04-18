@@ -7,11 +7,17 @@
     class="example-icon"
     aria-label="Example icon-button with menu icon"
     (click)="openDialog()"
+    *ngIf="!sessionStorage.getItem('isadmin')"
   >
     <mat-icon>computer</mat-icon>
   </button>
-  <button (click)="goForward()" matTooltip="take me back" mat-icon-button>
-    <mat-icon>arrow_forward_ios</mat-icon>
+  <button
+    (click)="goForward()"
+    *ngIf="sessionStorage.getItem('isadmin')"
+    matTooltip="take me back"
+    mat-icon-button
+  >
+    <mat-icon>power_settings_new</mat-icon>
   </button>
 </mat-toolbar>
 <router-outlet></router-outlet>

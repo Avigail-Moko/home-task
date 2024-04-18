@@ -1,7 +1,7 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import {Component,ElementRef,ViewChild,inject,Renderer2} from '@angular/core';
+import {Component, ElementRef,ViewChild,inject,Renderer2,} from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Observable, map, startWith } from 'rxjs';
@@ -20,6 +20,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   ],
 })
 export class WellcomeComponent {
+  maxDate = new Date();
   color: string = '';
   flag: boolean = false;
   errorMessage = '';
@@ -149,8 +150,8 @@ export class WellcomeComponent {
       setTimeout(() => {
         snackBarRef.dismiss();
       }, 7000);
+      sessionStorage.removeItem('reload');
     }
-    sessionStorage.removeItem('reload');
   }
   motorSelect() {
     this.flag = true;
