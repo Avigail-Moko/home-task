@@ -169,6 +169,7 @@ export class DataChartComponent {
     },
     theme: 'light2',
 
+    
     data: [
       {
         type: 'pie',
