@@ -162,7 +162,6 @@ export class DataChartComponent {
       },
     ],
   };
-
   pieChartOptions = {
     animationEnabled: true,
     title: {

@@ -15,9 +15,8 @@ export class AppComponent {
     private dialog: Dialog,
     private authGuard: AuthGuardService
   ) {}
-
+  
   sessionStorage = window.sessionStorage;
-
   flag = false;
   title = 'home-task';
   createRouter() {
