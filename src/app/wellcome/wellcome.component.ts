@@ -87,6 +87,7 @@ export class WellcomeComponent {
   ninthFormGroup = this.formBuild.group({
     MotorType: ['', Validators.required],
   });
+  
 
   remove(hobby: string): void {
     const index = this.hobbies.indexOf(hobby);
