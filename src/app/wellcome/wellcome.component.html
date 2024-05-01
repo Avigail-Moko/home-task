@@ -315,10 +315,10 @@
             required
           >
             <mat-label class="matlable">choose a motor type</mat-label>
-            <mat-radio-button value="Electric" (click)="motorSelect()"
+            <mat-radio-button value="Electric"
               >Electric</mat-radio-button
             >
-            <mat-radio-button value="Fuel" (click)="motorSelect()"
+            <mat-radio-button value="Fuel" 
               >Fuel</mat-radio-button
             >
           </mat-radio-group>
@@ -331,7 +331,7 @@
           color="accent"
           class="btn"
           (click)="saveUserData()"
-          [disabled]="!ngForm.valid || !flag || hobbies.length === 0"
+          [disabled]="!ngForm.valid || ninthFormGroup.value.MotorType === '' || hobbies.length === 0"
         >
           Send
         </button>
