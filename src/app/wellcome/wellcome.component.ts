@@ -28,7 +28,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class WellcomeComponent {
   maxDate = new Date();
   color: string = '';
-  flag: boolean = false;
   errorMessage = '';
   visitorsCounter = 0;
   separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -77,7 +76,6 @@ export class WellcomeComponent {
   sixthFormGroup = this.formBuild.group({
     Hobbies: [this.hobbies.length > 0 ? this.formBuild.array(this.hobbies, Validators.required) : null, Validators.required],
   });
-
   seventhFormGroup = this.formBuild.group({
     FavoriteColor: ['', Validators.required],
   });
@@ -139,8 +137,8 @@ export class WellcomeComponent {
       motorType: this.ninthFormGroup.value.MotorType,
     };
     this.aiCarService.pushItemToMyArray(newPersonData);
-    sessionStorage.setItem('reload', 'reload');
 
+    sessionStorage.setItem('reload', 'reload');
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     setTimeout(() => {
@@ -161,8 +159,4 @@ export class WellcomeComponent {
     }
   }
 
-  motorSelect() {
-    this.flag = true;
-  }
 }
-
