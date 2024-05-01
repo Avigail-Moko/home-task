@@ -1,7 +1,13 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import {Component, ElementRef,ViewChild,inject,Renderer2,} from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  ViewChild,
+  inject,
+  Renderer2,
+} from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Observable, map, startWith } from 'rxjs';
@@ -19,7 +25,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     },
   ],
 })
-
 export class WellcomeComponent {
   maxDate = new Date();
   color: string = '';
@@ -144,6 +149,7 @@ export class WellcomeComponent {
   }
 
   ngOnInit() {
+    sessionStorage.removeItem('isadmin');
     if ('reload' in sessionStorage) {
       const snackBarRef = this._snackBar.open(
         'Thank you very much! Your request has been submitted, and an email with the perfect match will be sent to you shortly.'
