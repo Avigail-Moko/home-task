@@ -27,7 +27,6 @@ export class AppComponent {
   goForward() {
     this.router.navigate(['/']);
     this.flag = false;
-    sessionStorage.removeItem('isadmin');
   }
   openDialog() {
     this.dialog.open(AdminDialogComponent);

@@ -144,6 +144,7 @@ export class WellcomeComponent {
   }
 
   ngOnInit() {
+    sessionStorage.removeItem('isadmin');
     if ('reload' in sessionStorage) {
       const snackBarRef = this._snackBar.open(
         'Thank you very much! Your request has been submitted, and an email with the perfect match will be sent to you shortly.'

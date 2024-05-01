@@ -28,7 +28,6 @@ export class AdminDialogComponent {
       })
       .then((success) => {
         if (success) {
-          sessionStorage.setItem('isadmin', 'isadmin');
           this.dialog.closeAll();
         } else alert('wrong password. please try again');
       });

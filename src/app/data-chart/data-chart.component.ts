@@ -8,7 +8,6 @@ import { AiCarDealershipService } from '../ai-car-dealership.service';
 })
 export class DataChartComponent {
   constructor(private aiCarService: AiCarDealershipService) {}
-  myArray: any[] = [];
   menFuelCounter = 0;
   womenFuelCounter = 0;
   menElectricCounter = 0;
@@ -21,17 +20,16 @@ export class DataChartComponent {
   cookingCounter = 0;
   musicCounter = 0;
   artCounter = 0;
-  hobbiesArray = ['sport', 'nature', 'cooking', 'music', 'art'];
 
   ngOnInit() {
-    this.countGenders();
-    this.seatsDistribution();
-    this.commonHobby();
+    sessionStorage.setItem('isadmin', 'isadmin');
+    this.loadMyArray();
   }
 
-  countGenders(): void {
+  loadMyArray(): void {
     this.aiCarService.getMyArray().subscribe((data: any[]) => {
       data.forEach((person) => {
+        //gender
         if (person.gender === 'Male') {
           if (person.motorType === 'Fuel') {
             this.menFuelCounter++;
@@ -45,10 +43,41 @@ export class DataChartComponent {
             this.womenElectricCounter++;
           }
         }
-        this.myArray = data;
-
-        this.updateChartData();
+        //seats
+        switch (person.amountOfSeats) {
+          case '2':
+            this.twoSeatsCounter++;
+            break;
+          case '5':
+            this.fiveSeatsCounter++;
+            break;
+          case '7':
+            this.sevenSeatsCounter++;
+            break;
+        }
+        //hobbies
+        person.hobbies.forEach((hobby: string) => {
+          switch (hobby) {
+            case 'Sport':
+              this.sportCounter++;
+              break;
+            case 'Nature':
+              this.natureCounter++;
+              break;
+            case 'Cooking':
+              this.cookingCounter++;
+              break;
+            case 'Music':
+              this.musicCounter++;
+              break;
+            case 'Art':
+              this.artCounter++;
+              break;
+          }
+        });
       });
+          this.updateChartData();
+
     });
   }
 
@@ -73,44 +102,6 @@ export class DataChartComponent {
       { label: 'Music', y: this.musicCounter },
       { label: 'Art', y: this.artCounter },
     ];
-  }
-  seatsDistribution() {
-    this.aiCarService.getMyArray().subscribe((data: any[]) => {
-      data.forEach((person) => {
-        if (person.amountOfSeats == 2) {
-          this.twoSeatsCounter++;
-        } else if (person.amountOfSeats == 5) {
-          this.fiveSeatsCounter++;
-        } else if (person.amountOfSeats == 7) {
-          this.sevenSeatsCounter++;
-        }
-      });
-    });
-    this.updateChartData();
-  }
-  commonHobby() {
-    this.aiCarService.getMyArray().subscribe((data: any[]) => {
-      data.forEach((person) => {
-        for (let index = 0; index < person.hobbies.length; index++) {
-          if (person.hobbies[index] === 'Sport') {
-            this.sportCounter++;
-          }
-          if (person.hobbies[index] === 'Nature') {
-            this.natureCounter++;
-          }
-          if (person.hobbies[index] === 'Cooking') {
-            this.cookingCounter++;
-          }
-          if (person.hobbies[index] === 'Music') {
-            this.musicCounter++;
-          }
-          if (person.hobbies[index] === 'Art') {
-            this.artCounter++;
-          }
-        }
-      });
-    });
-    this.updateChartData();
   }
 
   columnChartOptions = {
@@ -158,7 +149,7 @@ export class DataChartComponent {
         axisYType: 'secondary',
         legendText: 'women',
         showInLegend: true,
-        dataPoints: [{ label: 'loading...', y: 0 }],
+        dataPoints: [{}],
       },
     ],
   };
@@ -173,11 +164,7 @@ export class DataChartComponent {
       {
         type: 'pie',
         indexLabel: '{label} : {y}',
-        dataPoints: [
-          { y: 10, label: '2 seats' },
-          { y: 40, label: '5 seats' },
-          { y: 50, label: '7 seats' },
-        ],
+        dataPoints: [{}],
       },
     ],
   };
@@ -191,7 +178,7 @@ export class DataChartComponent {
     data: [
       {
         type: 'line',
-        dataPoints: [{ label: 'loading...', y: 0 }],
+        dataPoints: [{ }],
       },
     ],
   };
