@@ -16,7 +16,8 @@ export class AiCarDealershipService {
     if (storedArray) {
       this.myArraySubject.next(JSON.parse(storedArray));
     }
-  }
+  } 
+  
 
   public getMyArray(): Observable<any> {
     return this.myArraySubject.asObservable();
