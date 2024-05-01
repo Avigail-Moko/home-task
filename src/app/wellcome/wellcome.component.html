@@ -331,7 +331,7 @@
           color="accent"
           class="btn"
           (click)="saveUserData()"
-          [disabled]="!ngForm.valid || !flag"
+          [disabled]="!ngForm.valid || !flag || hobbies.length === 0"
         >
           Send
         </button>
