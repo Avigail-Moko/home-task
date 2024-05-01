@@ -98,6 +98,7 @@ export class WellcomeComponent {
       this.sixthFormGroup.get('Hobbies')?.setValue(this.hobbies);
     }
   }
+  
 
   selected(event: MatAutocompleteSelectedEvent): void {
     this.hobbies.push(event.option.viewValue);
