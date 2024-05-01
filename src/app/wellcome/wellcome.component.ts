@@ -165,3 +165,4 @@ export class WellcomeComponent {
     this.flag = true;
   }
 }
+
