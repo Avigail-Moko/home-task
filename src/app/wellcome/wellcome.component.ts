@@ -75,9 +75,8 @@ export class WellcomeComponent {
     Country: ['', Validators.required],
   });
   sixthFormGroup = this.formBuild.group({
-    Hobbies: [this.formBuild.array([], Validators.required)],
+    Hobbies: [this.hobbies.length > 0 ? this.formBuild.array(this.hobbies, Validators.required) : null, Validators.required],
   });
-
   seventhFormGroup = this.formBuild.group({
     FavoriteColor: ['', Validators.required],
   });
@@ -98,7 +97,6 @@ export class WellcomeComponent {
       this.sixthFormGroup.get('Hobbies')?.setValue(this.hobbies);
     }
   }
-  
 
   selected(event: MatAutocompleteSelectedEvent): void {
     this.hobbies.push(event.option.viewValue);
