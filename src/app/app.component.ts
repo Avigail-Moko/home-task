@@ -15,18 +15,15 @@ export class AppComponent {
     private dialog: Dialog,
     private authGuard: AuthGuardService
   ) {}
-  
+
   sessionStorage = window.sessionStorage;
-  flag = false;
   title = 'home-task';
   createRouter() {
     this.router.navigate(['/data-chart']);
-    this.flag = true;
   }
 
   goForward() {
     this.router.navigate(['/']);
-    this.flag = false;
   }
   openDialog() {
     this.dialog.open(AdminDialogComponent);

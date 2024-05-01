@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
     motorType: false,
     fullName: false,
   };
-  counter= 0;
+  counter = 0;
 
   constructor(private aiCarDealership: AiCarDealershipService) {
     this.dataSource = new MatTableDataSource<PeriodicElement>();

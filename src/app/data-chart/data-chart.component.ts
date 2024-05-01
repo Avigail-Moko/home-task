@@ -76,8 +76,7 @@ export class DataChartComponent {
           }
         });
       });
-          this.updateChartData();
-
+      this.updateChartData();
     });
   }
 
@@ -178,7 +177,7 @@ export class DataChartComponent {
     data: [
       {
         type: 'line',
-        dataPoints: [{ }],
+        dataPoints: [{}],
       },
     ],
   };
